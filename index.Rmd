@@ -1,0 +1,60 @@
+---
+title       : An overview on tourism data in Spain
+subtitle    : 
+author      : Martin Pons
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap, quiz, shiny, interactive]            # {mathjax, quiz, bootstrap, shiny, interactive}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+ext_widgets: {rCharts: [libraries/morris]}
+---
+
+## The Motivation
+
+- One Of the main sources for getting toursim related data in Spain is the Touristic Studies Institute (IET).
+- The data is presented in the form of time series tables
+- Students from tourism degrees in Spain could get a better global vision if this data were displayed in animated charts
+
+<img src="assets/img/Captura.png" height="350", width="400"/>
+
+--- .class #id 
+
+## The Process
+
+- Ann App was developed using slidify package in R software
+- The original app gets the data direclty from the (IET). However, for the course project this data is first downloaded and then readed locally.
+- Four time series From the IET were used for the app:
+  1. Total number of visitors in Spain by tipology (Tourists and Excursionists)
+  2. Total number of tourists in Spain by region
+  3. Average days spent in Spain by tourists from the main tourists provider countries
+  4. Mean daily expenditures by tourist form the main tourist provider contries
+- A preprocessing, cleaning and formatting of the data was carried out in order to display the desired charts
+- The charts were built using rCharts an GoogleVis packages from R
+
+--- .class #id 
+
+## The App
+
+- Three charts are displayed in the app:
+  1. Total number of visitors in Spain in differnent levels of aggregation
+  2. Interannual growth rates in different regions in Spain
+  3. An animated chart in time displaying the average number of days spent by international tourists from different countries in Spain vs. the main daily expenditures from tourist in these countries.
+  
+  
+<img src="assets/img/Captura2.png" height="380", width="480"/>
+
+--- .class #id 
+
+## A Real Example
+
+We display here one of the charts built using rCharts
+
+``````{r, results='asis'}
+require(rCharts)
+data<-read.csv("assets/inter.regions.csv")
+m1<-mPlot(x=as.character("Date"), y="Catalonia", data=data, type="Line")
+m1$print('chart1')
+```
